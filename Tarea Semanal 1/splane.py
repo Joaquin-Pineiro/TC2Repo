@@ -1721,7 +1721,7 @@ def GroupDelay(myFilter, fig_id='none', label = '', npoints = 1000):
 
     return fig_id, axes_hdl
 
-def bodePlot(myFilter, fig_id='none', axes_hdl='none', label = '', npoints = 1000 ):
+def bodePlot(myFilter,xlim,ylim,fig_id='none', axes_hdl='none', label = '', npoints = 1000 ):
     
     if isinstance(myFilter, np.ndarray):
         # SOS section
@@ -1734,12 +1734,12 @@ def bodePlot(myFilter, fig_id='none', axes_hdl='none', label = '', npoints = 100
             
             num, den = one_sos2tf(myFilter[ii,:])
             thisFilter = TransferFunction(num, den)
-            w, mag[:, ii], phase[:,ii] = thisFilter.bode(np.logspace(-2,2,npoints))
+            w, mag[:, ii], phase[:,ii] = thisFilter.bode(np.logspace(xlim[-1],xlim[0],npoints))
             sos_label += [label + ' - SOS {:d}'.format(ii)]
         
         # whole filter
         thisFilter = sos2tf_analog(myFilter)
-        w, mag[:, cant_sos], phase[:,cant_sos] = thisFilter.bode(np.logspace(-2,2,npoints))
+        w, mag[:, cant_sos], phase[:,cant_sos] = thisFilter.bode(np.logspace(xlim[-1],xlim[0],npoints))
         sos_label += [label]
         
         label = sos_label
@@ -1747,7 +1747,7 @@ def bodePlot(myFilter, fig_id='none', axes_hdl='none', label = '', npoints = 100
     else:
         # LTI object
         cant_sos = 0
-        w, mag, phase = myFilter.bode(np.logspace(-2,2,npoints))
+        w, mag, phase = myFilter.bode(np.logspace(xlim[-1],xlim[0],npoints))
         
         if isinstance(label, str):
             label = [label]
@@ -1779,6 +1779,7 @@ def bodePlot(myFilter, fig_id='none', axes_hdl='none', label = '', npoints = 100
 #    plt.xlabel('Angular frequency [rad/sec]')
     plt.ylabel('Magnitude [dB]')
     plt.title('Magnitude response')
+    plt.ylim(ylim[-1],ylim[0])
     
     if label != '' :
         # mag_ax_hdl.legend( label )
