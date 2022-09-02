@@ -38,8 +38,8 @@ fig.suptitle('Butterworth bandpass filter IIR', fontsize=16)
 ax[0,0].plot(f,20*np.log10(abs(1.79*H)))
 ax[0,0].set_xlim([0,100])
 ax[0,0].set_ylim([-60,10])
-ax[0,0].set_xlabel('Frequency [Hz]')
-ax[0,0].set_ylabel('Amplitude [dB]')
+ax[0,0].set_xlabel('F [Hz]')
+ax[0,0].set_ylabel(r'$|H(\Omega)| [dB]$')
 
 ax[0,0].fill([f_stop1, 0 ,  0,   f_stop1], [-alpha_min+5, -alpha_min+5, 0, 0], '0.9', lw=0) # stop
 ax[0,0].fill([f_paso2,  f_paso1,  f_paso1,   f_paso2], [-60, -60, -alpha_max+5, -alpha_max+5], '0.9', lw=0) # stop
@@ -88,10 +88,6 @@ t = np.linspace(0,N0/fs,N0)
 ax.plot(t,signal,label='ECG Filtrado')
 ax.plot(t,ecg_one_lead,label='ECG')
 ax.legend()
-
-
-plt.show()
-
 
 
 plt.show()
