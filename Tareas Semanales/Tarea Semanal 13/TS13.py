@@ -9,7 +9,7 @@ import splane as splane
 import sympy as sim
 
 from schemdraw import Drawing
-from schemdraw.elements import  Resistor, Capacitor, Inductor
+from schemdraw.elements import  Resistor, Capacitor, Inductor, Line
 
 
 l = ltspice.Ltspice('Punto 1.raw')
@@ -78,7 +78,8 @@ d = splane.dibujar_tanque_RC_serie(d, R3, C3)
 
 d = splane.dibujar_elemento_serie(d, Resistor, RL)
 
-
+d += Line().down().length(d.unit)
+d += Line().up().length(d.unit)
 d = splane.dibujar_puerto_salida(d,
                         voltage_lbl = ('+', '$V2$', '-'), 
                         current_lbl = '$I2$')
