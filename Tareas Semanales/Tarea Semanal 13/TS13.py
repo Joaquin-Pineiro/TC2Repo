@@ -22,12 +22,13 @@ plt.close('all')
 #%% Punto 1
 
 freq = l.get_frequency()
-T =l.get_data('I(R4)')
+T =l.get_data('I(RL)')
 
 fig, ax = plt.subplots(1, 1, figsize=(7,7))
 fig.suptitle(r'$T(s) =\frac{I2}{I1}$')
 
 ax.semilogx(freq, 20 * np.log10(np.abs(T)), label='LTSpice',linewidth=3)
+
 
 
 ax.grid()
@@ -104,7 +105,7 @@ fig, ax = plt.subplots(1, 1, figsize=(7,7))
 fig.suptitle(r'$T(s) = \frac{V2}{I1}$')
 
 ax.semilogx(freq, 20 * np.log10(np.abs(T)), label='LTSpice',linewidth=3)
-
+jeje=20 * np.log10(np.abs(T))
 
 ax.grid()
 ax.set_xlabel("Frequency (Hz)")
